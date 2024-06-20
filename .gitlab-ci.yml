@@ -1,18 +1,14 @@
 smoketest:
   image: hub.lumigame.com/pentagon-base/resource-monitor-game-$GAMEID
   stage: test
-  tags:
-    - auto-test-prod
   script:
-    - cd tests
+    - cd /app/tests
     - npm run test:smoke --env=$ENV --gameid=$GAMEID --project=$STACK_NAME --trackDownload=true
-
   retry: 1
   rules:
     - if: $TRIGGER == "true" && $MODE == "SMOKE"
       when: always
     - when: never
-
   artifacts:
     paths:
       - playwright-report
