@@ -4,6 +4,7 @@ smoketest:
   script:
     - cd /app/tests
     - npm run test:smoke --env=$ENV --gameid=$GAMEID --project=$STACK_NAME --trackDownload=true
+    - cp -r . $CI_PROJECT_DIR
   retry: 1
   rules:
     - if: $TRIGGER == "true" && $MODE == "SMOKE"
